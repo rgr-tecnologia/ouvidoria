@@ -1,0 +1,21 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "16.13.0",
+    "sdksVersions": {
+      "@microsoft/microsoft-graph-client": "3.0.2",
+      "@microsoft/teams-js": "2.12.0"
+    },
+    "version": "1.19.0",
+    "libraryName": "ouvidoria",
+    "libraryId": "d9d90e1b-2594-40f3-b96b-f5e468d9cbe7",
+    "environment": "spo",
+    "packageManager": "npm",
+    "solutionName": "Ouvidoria",
+    "solutionShortDescription": "Ouvidoria description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "componentType": "webpart"
+  }
+}

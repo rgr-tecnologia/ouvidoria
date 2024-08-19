@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "ouvidoria-client-side-solution",
+    "id": "d9d90e1b-2594-40f3-b96b-f5e468d9cbe7",
+    "version": "1.0.0.11",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.19.0"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "Ouvidoria description"
+      },
+      "longDescription": {
+        "default": "Ouvidoria description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "ouvidoria Feature",
+        "description": "The feature that activates elements of the ouvidoria solution.",
+        "id": "84a00086-696e-4124-8620-20e817dba252",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/ouvidoria.sppkg"
+  }
+}

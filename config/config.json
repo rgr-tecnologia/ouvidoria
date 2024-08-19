@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "ouvidoria-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/ouvidoria/OuvidoriaWebPart.js",
+          "manifest": "./src/webparts/ouvidoria/OuvidoriaWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "OuvidoriaWebPartStrings": "lib/webparts/ouvidoria/loc/{locale}.js"
+  }
+}
