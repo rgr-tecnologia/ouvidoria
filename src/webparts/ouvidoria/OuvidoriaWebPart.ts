@@ -3,6 +3,7 @@ import {
   type IPropertyPaneConfiguration,
   PropertyPaneTextField
 } from '@microsoft/sp-property-pane';
+//import { SPHttpClient, HttpClientResponse } from "@microsoft/sp-http";
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 //import styles from './OuvidoriaWebPart.module.scss';
 import * as strings from 'OuvidoriaWebPartStrings';
@@ -110,7 +111,7 @@ export default class OuvidoriaWebPart extends BaseClientSideWebPart<IOuvidoriaWe
   private pegaManipulacaoEventos(): void {
       const checkbox = this.domElement.querySelector("#meuCheckbox") as HTMLInputElement;
       if (checkbox) {
-          checkbox.addEventListener('change', this.handleCheckboxChange)
+          checkbox.addEventListener('change', this.handleCheckboxChange);
       }
       const enviarBtn = this.domElement.querySelector("#enviarBtn") as HTMLButtonElement;
       if (enviarBtn) {
@@ -185,7 +186,14 @@ export default class OuvidoriaWebPart extends BaseClientSideWebPart<IOuvidoriaWe
             destinatarios = [];
             break;
     }
-    console.log(destinatarios)
+    await this.insertDb({
+       Tipo: tipo,
+       Gravidade: gravidade,
+       Departamento: departamento,
+       Usuario: anonimo? null :usuario,
+       Anonimato: anonimo,
+       Descreva: anonimo? null :denuncia,
+    });
     const ccDestinatarios = [usuario];
     const emailProps: any = {
         To: destinatarios,
@@ -206,8 +214,15 @@ export default class OuvidoriaWebPart extends BaseClientSideWebPart<IOuvidoriaWe
     const sp = spfi().using(SPFx(this.context));
     await sp.utility.sendEmail(emailProps);
     
+
     alert('Email enviado com sucesso');
+    
     location.reload();
+  }
+
+  private async insertDb(data: any) {
+      const sp = spfi().using(SPFx(this.context));
+      await sp.web.lists.getByTitle("Ouvidoria_New").items.add(data);
   }
 
   private async obterUsuarioLogado(): Promise<void> {

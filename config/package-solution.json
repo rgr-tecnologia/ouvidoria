@@ -3,7 +3,7 @@
   "solution": {
     "name": "ouvidoria-client-side-solution",
     "id": "d9d90e1b-2594-40f3-b96b-f5e468d9cbe7",
-    "version": "1.0.0.11",
+    "version": "1.0.0.12",
     "includeClientSideAssets": true,
     "skipFeatureDeployment": true,
     "isDomainIsolated": false,
