@@ -173,10 +173,10 @@ export default class OuvidoriaWebPart extends BaseClientSideWebPart<IOuvidoriaWe
             }
             break;
         case 'Sugestao':
-            destinatarios = ['fatima.oliveira@cjtrade.com.br' , 'administrative.br@cjtrade.net' , 'priscila.moraes@cjtrade.com.br'];
+            destinatarios = ['fatima.oliveira@cjtrade.com.br'];
             break;
         case 'Reclamacao':
-            destinatarios = ['fatima.oliveira@cjtrade.com.br' , 'administrative.br@cjtrade.net' , 'priscila.moraes@cjtrade.com.br'];
+            destinatarios = ['fatima.oliveira@cjtrade.com.br'];
             break;
         case 'Elogio':
             destinatarios = ['fatima.oliveira@cjtrade.com.br'];
