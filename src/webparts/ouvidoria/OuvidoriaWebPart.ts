@@ -13,7 +13,6 @@ import "@pnp/sp/lists";
 import "@pnp/sp/items";
 import "@pnp/sp/items/get-all";
 import "@pnp/sp/site-users/web";
-import "@pnp/sp/sputilities";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export interface IOuvidoriaWebPartProps {
@@ -159,53 +158,28 @@ export default class OuvidoriaWebPart extends BaseClientSideWebPart<IOuvidoriaWe
         alert('Por favor, preencha todos os campos obrigatórios.');
         return;
     }
-
-    let destinatarios: string[];
-
-    switch (tipo) {
-        case 'Denuncia':
-            if (departamento === 'Administrative' || departamento === 'Human Resources') {
-                destinatarios = ['renata.alencar@cjtrade.com.br'];
-            } else if (departamento === 'Legal') {
-                destinatarios = ['fatima.oliveira@cjtrade.com.br'];
-            } else {
-                destinatarios = ['fatima.oliveira@cjtrade.com.br'];
-            }
-            break;
-        case 'Sugestao':
-            destinatarios = ['fatima.oliveira@cjtrade.com.br'];
-            break;
-        case 'Reclamacao':
-            destinatarios = ['fatima.oliveira@cjtrade.com.br'];
-            break;
-        case 'Elogio':
-            destinatarios = ['fatima.oliveira@cjtrade.com.br'];
-            break;
-        default:
-            destinatarios = [];
-            break;
-    }
-    console.log(destinatarios)
-    const ccDestinatarios = [usuario];
-    const emailProps: any = {
-        To: destinatarios,
-        Subject: `Ouvidoria - Nova ${tipo} - ${gravidade}`,
-        Body: `
-            <p><strong>Tipo:</strong> ${tipo}</p>
-            <p><strong>Gravidade:</strong> ${gravidade}</p>
-            <p><strong>Departamento:</strong> ${departamento}</p>
-            <p><strong>Descrição:</strong> ${denuncia}</p>
-            ${anonimo ? '' : `<p><strong>Usuário:</strong> ${usuario}</p>`}
-        `,
-        BCC: ccDestinatarios,
-        AdditionalHeaders: {
-            "content-type": "text/html"
-        }
-    };
     
-    const sp = spfi().using(SPFx(this.context));
-    await sp.utility.sendEmail(emailProps);
+    // URL do Flow (gatilho HTTP)
+    const flowUrl = "https://default14393ff2969b46eeb9b8d1c3157d9e.82.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/2c5d66407c154bf4bd027cc9bcbd9c81/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=l18pcYqXZ1keqUb3CB5lSGQi2tE46zma0MzFPkeeLlw";
+
     
+
+    await fetch(flowUrl, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            Type: tipo,
+            Gravity: gravidade,
+            Department: departamento,
+            Description: denuncia,
+            Anonimous: anonimo,
+            User: anonimo ? null : usuario // Envia "Anônimo" se for marcado como anônimo, caso contrário, envia o email do usuário
+
+        })
+    });
+
     alert('Email enviado com sucesso');
     location.reload();
   }
@@ -254,3 +228,9 @@ export default class OuvidoriaWebPart extends BaseClientSideWebPart<IOuvidoriaWe
       };
   }
 }
+
+
+
+
+
+
