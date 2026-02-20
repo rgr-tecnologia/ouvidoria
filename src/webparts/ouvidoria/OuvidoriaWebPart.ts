@@ -140,67 +140,15 @@ export default class OuvidoriaWebPart extends BaseClientSideWebPart<IOuvidoriaWe
       });
   }
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   private handleCheckboxChange = (event: Event) => {
       const target = event.target as HTMLInputElement;
       this.anonimoEstado = target.checked;
   }
 
 
-// private handleEnviarClick = async () => {
-//   const tipo = (this.domElement.querySelector("#tipoInput") as HTMLSelectElement).value;
-//   const gravidade = (this.domElement.querySelector("#gravidadeInput") as HTMLSelectElement).value;
-//   const departamento = (this.domElement.querySelector("#departamentoInput") as HTMLSelectElement).value;
-//   const denuncia = (this.domElement.querySelector("#denunciaInput") as HTMLTextAreaElement).value;
-//   const anonimo = this.anonimoEstado;
-//   const usuario = this.usuarioLogado;
 
-//   // Verifica se os campos obrigatórios foram preenchidos
-//   if (!tipo || (tipo !== 'Elogio' && tipo !== 'Sugestao' && !gravidade) || !departamento || !denuncia) {
-//       alert('Por favor, preencha todos os campos obrigatórios.');
-//       return;
-//   }
-  
-//   // URL do Flow (gatilho HTTP)
-//   const flowUrl = "https://default14393ff2969b46eeb9b8d1c3157d9e.82.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/2c5d66407c154bf4bd027cc9bcbd9c81/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=l18pcYqXZ1keqUb3CB5lSGQi2tE46zma0MzFPkeeLlw";
-
-
-// try {
-//   const response = await fetch(flowUrl, {
-//     method: "POST",
-//     headers: { "Content-Type": "application/json" },
-//     body: JSON.stringify({
-//       Type: tipo,
-//       Gravity: gravidade,
-//       Department: departamento,
-//       Description: denuncia,
-//       Anonimous: anonimo,
-//       User: anonimo ? null : usuario
-//     })
-//   });
-
-//   const text = await response.text();
-//   let result: any = {};
-//   try {
-//     result = JSON.parse(text);
-//   } catch (e) {
-//     console.warn("Resposta não é JSON:", text);
-//   }
-
-//   if (response.ok && result.success) {
-//     alert(result.message || "executado com sucesso");
-//     location.reload();
-//   } else {
-//     // Usa a mensagem do JSON se existir, caso contrário usa texto bruto
-//     throw new Error(result?.message || text || `Erro HTTP: ${response.status}`);
-//   }
-
-// } catch (error: any) {
-//   console.error("Erro ao realizar operação:", error);
-//   alert(`Erro ao realizar operação: ${error.message || error}`);
-// }
-
-
-// }
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 private handleEnviarClick = async () => {
   const enviarBtn = this.domElement.querySelector("#enviarBtn") as HTMLButtonElement;
 
@@ -245,6 +193,8 @@ private handleEnviarClick = async () => {
     
 
     const text = await response.text();
+    
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let result: any = {};
     try {
       result = JSON.parse(text);
@@ -259,6 +209,7 @@ private handleEnviarClick = async () => {
       throw new Error(result?.message || text || `Erro HTTP: ${response.status}`);
     }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     alert("Erro! Não foi possível enviar sua solicitação. Por favor, tente novamente mais tarde. ❌");
   } finally {
