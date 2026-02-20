@@ -229,7 +229,9 @@ private handleEnviarClick = async () => {
   try {
     const response = await fetch(flowUrl, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", 'x-spfx-key':'T9@vL$3xP!7kZ#2rQ^8mW&4yF*6uD157'},
+
+
       body: JSON.stringify({
         Type: tipo,
         Gravity: gravidade,
@@ -239,6 +241,8 @@ private handleEnviarClick = async () => {
         User: anonimo ? null : usuario
       })
     });
+
+    
 
     const text = await response.text();
     let result: any = {};
